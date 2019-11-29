@@ -1,0 +1,53 @@
+Source: chicken
+Homepage: http://www.call-cc.org
+Section: interpreters
+Priority: optional
+Maintainer: Davide Puricelli (evo) <evo@debian.org>
+Build-Depends: debhelper (>= 10), chrpath, texinfo
+Standards-Version: 3.8.4.0
+
+Package: chicken-bin
+Section: lisp
+Architecture: any
+Conflicts: chicken, chicken-dev
+Depends: ${shlibs:Depends}, ${misc:Depends}, libchicken-dev (= ${binary:Version})
+Replaces: chicken, chicken-dev
+Description: Practical and portable Scheme system - compiler
+ CHICKEN is a Scheme compiler which compiles a subset of R5RS into C.
+ It uses the ideas presented in Baker's paper "Cheney on the MTA", and
+ has a small core and is easily extendable.
+ .
+ This package contains the compiler.
+ 
+
+Package: libchicken11
+Architecture: any
+Section: libs
+Priority: optional
+Replaces: chicken, chicken-dev, libchicken0, libchicken3, libchicken4, libchicken5, libchicken6, libchicken7, libchicken8, libchicken9
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Conflicts: chicken, chicken-dev, libchicken0, libchicken3, libchicken4, libchicken5, libchicken6, libchicken7, libchicken8, libchicken9
+Description: Practical and portable Scheme system - runtime
+ CHICKEN is a Scheme compiler which compiles a subset of R5RS into C. 
+ It uses the ideas presented in Baker's paper "Cheney on the MTA", and 
+ has a small core and is easily extendable.
+ .
+ This package contains the shared library needed to run programs using
+ chicken.
+ 
+
+Package: libchicken-dev
+Architecture: any
+Section: libdevel
+Priority: optional
+Conflicts: chicken, chicken-dev
+Depends: libchicken11 (= ${binary:Version}), libpcre3-dev, ${misc:Depends}
+Replaces: chicken, chicken-dev
+Description: Practical and portable Scheme system - development
+ CHICKEN is a Scheme compiler which compiles a subset of R5RS into C.
+ It uses the ideas presented in Baker's paper "Cheney on the MTA", and
+ has a small core and is easily extendable.
+ .
+ This package contains the header file and static library for developing
+ with chicken.
+

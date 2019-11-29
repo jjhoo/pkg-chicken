@@ -1,0 +1,60 @@
+#!/usr/bin/make -f
+
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
+include /usr/share/dpkg/architecture.mk
+CFLAGS = $(shell dpkg-buildflags --get CFLAGS)
+CPPFLAGS = $(shell dpkg-buildflags --get CPPFLAGS)
+LDFLAGS = $(shell dpkg-buildflags --get LDFLAGS)
+
+export PLATFORM=linux
+export PREFIX=/usr
+export VARDIR=/var/lib
+export DEBUGBUILD=1
+
+%:
+	dh $@ --no-parallel
+
+
+override_dh_auto_clean:
+	dh_auto_clean
+	find . -name '*.so' -delete
+	rm -rf tests/a.out tests/empty-file tests/fft1  tests/fft2 tests/find-files-test-dir/dir-link-target/bar \
+                tests/find-files-test-dir/dir-link-target/foo \
+                tests/find-files-test-dir/file1 tests/find-files-test-dir/file2 \
+                tests/rev-app-2/libchicken.so.11 tests/rev-app-2/rev-app tests/tmp/xxx \
+                tests/find-files-test-dir/dir-link-name feathers \
+                tests/scrutiny-2.out \
+                tests/scrutiny.out tests/specialization.out test-repository/types.db \
+                tests/test-repository/types.db \
+                tests/dwindtst.out tests/ec.import.scm tests/m3.import.scm \
+                tests/num.import.scm tests/r4rstest.log tests/reexport-m1.import.scm \
+                tests/reexport-m3.import.scm tests/reexport-m4.import.scm \
+                tests/reexport-m5.import.scm tests/reexport-m6.import.scm \
+                tests/rev-app-2/reverser.setup-info tests/reverser/tags/1.0/reverser.import.scm \
+                tests/reverser/tags/1.1/reverser.import.scm tests/square-functor.import.scm \
+                tests/test-repository/reverser.setup-info tests/tmp.c tests/tmp1 tests/tmp2 \
+                tests/tmp3 tests/TEST.profile tests/a.link tests/env.out tests/messages.out \
+		tests/null.c tests/r4rstest.out tests/test-repository/reverser.import.scm \
+		tests/test-repository/sample-module.import.scm tests/test-repository/sample-module.link \
+		tests/tmp1.out tests/tmp2.out tests/tmp3.out tests/x.out tests/fft1.out tests/fft2.out \
+		tests/null tests/null.o tests/test-repository/reverser.o tests/test-repository/sample-module.o \
+		tests/redact-gensyms tests/scrutinizer-message-format.out tests/scrutinizer-message-format.redacted \
+		tests/scrutiny-2.redacted tests/scrutiny.redacted tests/specialization.redacted 
+
+override_dh_auto_build:
+	dh_auto_build -- HOSTSYSTEM=$(DEB_HOST_GNU_TYPE) PREFIX=$(PREFIX) C_COMPILER_OPTIMIZATION_OPTIONS="$(CFLAGS) $(CPPFLAGS)" VARDIR=/var/lib/
+
+override_dh_auto_install:
+	dh_auto_install -- \
+		HOSTSYSTEM=$(DEB_HOST_GNU_TYPE) \
+		LINKER_LINK_SHARED_DLOADABLE_OPTIONS='-L. -shared $(LDFLAGS)' \
+		LINKER_LINK_SHARED_PROGRAM_OPTIONS='$(LDFLAGS)' \
+		LIBCHICKEN_SO_LINKER_OPTIONS='$(LDFLAGS) -Wl,-soname,libchicken.so.11'
+	chrpath -d $(CURDIR)/debian/tmp/var/lib/chicken/11/*.so
+
+override_dh_install:
+	dh_install -Xfeathers
+
+override_dh_makeshlibs:
+	dh_makeshlibs -V

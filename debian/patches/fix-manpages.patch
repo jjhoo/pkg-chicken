@@ -1,0 +1,39 @@
+Index: chicken-5.0.0/chicken-install.mdoc
+===================================================================
+--- chicken-5.0.0.orig/chicken-install.mdoc
++++ chicken-5.0.0/chicken-install.mdoc
+@@ -109,7 +109,7 @@ Location where eggs are retrieved and bu
+ .It Ev CHICKEN_INSTALL_REPOSITORY
+ The path where extension libraries are installed. Defaults to the
+ package library path selected during configuration
+-.Pq usually $prefix/lib/chicken/<binary-version> .
++.Pq usually /var/lib/chicken/<binary-version> .
+ .It Ev SUDO
+ The command to execute when using
+ .Fl s
+Index: chicken-5.0.0/chicken-status.mdoc
+===================================================================
+--- chicken-5.0.0.orig/chicken-status.mdoc
++++ chicken-5.0.0/chicken-status.mdoc
+@@ -77,7 +77,7 @@ The following environment variables chan
+ .It Ev CHICKEN_INSTALL_REPOSITORY
+ The path where extension libraries are installed. Defaults to the
+ package library path selected during configuration
+-.Pq usually $prefix/lib/chicken/<binary-version> .
++.Pq usually /var/lib/chicken/<binary-version> .
+ .It Ev CHICKEN_REPOSITORY_PATH
+ One or more directories holding extension libraries. Defaults to the
+ installation repository.
+Index: chicken-5.0.0/chicken-uninstall.mdoc
+===================================================================
+--- chicken-5.0.0.orig/chicken-uninstall.mdoc
++++ chicken-5.0.0/chicken-uninstall.mdoc
+@@ -72,7 +72,7 @@ The following environment variables chan
+ .It Ev CHICKEN_INSTALL_REPOSITORY
+ The path where extension libraries are installed. Defaults to the
+ package library path selected during configuration
+-.Pq usually $prefix/lib/chicken/<binary-version> .
++.Pq usually /var/lib/chicken/<binary-version> .
+ .It Ev SUDO
+ The command to execute when using
+ .Fl s

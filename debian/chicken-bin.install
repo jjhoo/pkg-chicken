@@ -1,0 +1,4 @@
+usr/bin
+var/lib/chicken/11/*.so
+var/lib/chicken/11/*.db
+usr/share/man/man1/*.1

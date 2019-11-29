@@ -1,0 +1,355 @@
+chicken (5.1.0-1) unstable; urgency=low
+
+  * New upstream version; closes: #920675.
+  * Now shipping libchicken11 instead of libchicken9.
+  * Fixed debian/rules to make chicken cross buildable, closes: #915818.
+
+ -- Davide Puricelli (evo) <evo@debian.org>  Sat, 22 Jun 2019 11:41:17 +0200
+
+chicken (5.0.0-1) unstable; urgency=low
+
+  * New upstream version.
+  * Now shipping libchicken9 instead of libchicken8.
+
+ -- Davide Puricelli (evo) <evo@debian.org>  Fri, 14 Jun 2019 10:39:27 +0200
+
+chicken (4.13.0-1) unstable; urgency=low
+
+  * New upstream version.
+  * Acknowledging previous NMUs, thanks!
+  * Removing patches CVE-2017-9334, CVE-2017-6949 and CVE-2017-11343,
+    now shipped upstream. 
+
+ -- Davide Puricelli (evo) <evo@debian.org>  Fri, 03 Aug 2018 09:20:43 +0200
+
+chicken (4.12.0-0.3) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Upload to unstable.
+  * Add a watch file.
+
+ -- Mattia Rizzolo <mattia@debian.org>  Fri, 17 Nov 2017 17:57:14 +0100
+
+chicken (4.12.0-0.2) experimental; urgency=medium
+
+  * Non-maintainer upload.
+  * Re-upload NMU from Tobias rejected by the archive software.
+  * Remove useless debian/*.dirs files.
+  * Bump debhelper compat level to 10.
+  * debian/rules: rewrite using the dh sequencer.  Closes: #879640
+    + Keep parallel disable due to the makefile not being parallel-safe.
+    + This also enables build-time tests, which are never a bad things.
+    + Remove injection of rpath, as it's not compliant to Debian Policy.
+    + Fix linker flags passing to not assume LDFLAGS ends with -Wl.  Closes: #743065
+
+ -- Mattia Rizzolo <mattia@debian.org>  Tue, 14 Nov 2017 22:47:09 +0100
+
+chicken (4.12.0-0.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * New upstream release.
+      - fixes CVE-2016-6830, CVE-2016-6831 (Closes: #834845)
+      - fixes CVE-2016-9954 (Closes: #851278)
+  * Cherry pick upstream patches for. Patches are named after the CVE
+      - CVE-2017-9334 (Closes: #863884)
+      - CVE-2017-6949 (Closes: #858057)
+      - CVE-2017-11343 (Closes: #870266)
+
+ -- Tobias Frost <tobi@debian.org>  Sat, 21 Oct 2017 23:04:32 +0200
+
+chicken (4.11.0-1) unstable; urgency=medium
+
+  * New upstream version; closes: #825720, #844371.
+  * Now shipping libchicken8 instead of libchicken7.
+  * Removed obsolete dpkg option from debian/rules; closes: #834103.
+
+ -- Davide Puricelli (evo) <evo@debian.org>  Wed, 14 Dec 2016 23:41:18 +0100
+
+chicken (4.10.0-1) unstable; urgency=high
+
+  * New upstream version, fixing CVE-2014-9651 and CVE-2015-4556.
+    closes: #775346, #788833.
+  * ACK to Tobias Frost's NMU, thanks! closes: #825724.
+
+ -- Davide Puricelli (evo) <evo@debian.org>  Sun, 12 Jun 2016 17:33:30 +0200
+
+chicken (4.9.0.1-1) unstable; urgency=high
+
+  * New upstream version;
+    fixed a wrong C_MINOR_VERSION setting; closes: #768308.
+
+ -- Davide Puricelli (evo) <evo@debian.org>  Sun, 23 Nov 2014 19:24:20 +0100
+
+chicken (4.9.0-1) unstable; urgency=high
+
+  * New upstream version, fixing CVE-2014-3776; closes: #748904.
+  * Removed fix-untrusted-code.patch and fix-command-injection.patch,
+    now shipped upstream.
+  * Now shipping libchicken7 instead of libchicken6.
+
+ -- Davide Puricelli (evo) <evo@debian.org>  Sat, 07 Jun 2014 12:20:17 +0200
+
+chicken (4.8.0.5-1) unstable; urgency=high
+
+  * New upstream version (fixing CVE-2013-4385); closes: #724740.
+  * Removing Build-Depends on libpcre3-dev; closes: #729144.
+
+ -- Davide Puricelli (evo) <evo@debian.org>  Sat, 01 Feb 2014 19:38:55 +0100
+
+chicken (4.8.0.3-3) unstable; urgency=high
+
+  * Fixed LDFLAGS on ia64; closes: #704840.
+
+ -- Davide Puricelli (evo) <evo@debian.org>  Wed, 17 Jul 2013 15:24:16 +0200
+
+chicken (4.8.0.3-2) unstable; urgency=high
+
+  * Added fix-regenerated-cfiles.patch.
+    Modifying .scm files was not enough, I had to include new .c files, too.
+    In this way we have a *huge* diff file, but we avoided to Build-Depends
+    on chicken-bin itself (I didn't like that approach).
+    Hopefully this is just temporary, as soon as those changes will be
+    included upstream we'll revert to a small diff file; closes: #717067.
+
+ -- Davide Puricelli (evo) <evo@debian.org>  Wed, 17 Jul 2013 10:49:42 +0200
+
+chicken (4.8.0.3-1) unstable; urgency=high
+
+  * New upstream version, including upstream fixes for:
+    - CVE-2012-6122 Use POSIX() poll on systems where available.
+    - CVE-2012-6123 Added checks for embedded '\0' characters.
+    - CVE-2012-6124 On 64-bit machines the "random" procedure no longer
+      truncates result values.
+    - CVE-2012-6125 Improved hash table collision resistance.  
+  * Added fix-untrusted-code.patch to prevent execution of untrusted code,
+    see CVE-2013-1874, patch provided by upstream.
+  * Added fix-command-injection.patch to fix a command injection
+    vulnerability, see CVE-2013-2024, patch provided by upstream.
+
+ -- Davide Puricelli (evo) <evo@debian.org>  Mon, 15 Jul 2013 11:23:44 +0200
+
+chicken (4.8.0-1) unstable; urgency=low
+
+  * New upstream version; closes: 689382.
+
+ -- Davide Puricelli (evo) <evo@debian.org>  Thu, 29 Nov 2012 01:27:16 +0100
+
+chicken (4.7.0-1) unstable; urgency=low
+
+  * New upstream version; closes: #639215.
+  * debian/control: updated homepage URL; closes: #617963.
+  * Now shipping libchicken6 instead of libchicken5.
+
+ -- Davide Puricelli (evo) <evo@debian.org>  Mon, 05 Sep 2011 15:17:30 +0200
+
+chicken (4.6.0-1) unstable; urgency=low
+
+  * New upstream version; closes: #609257.
+
+ -- Davide Puricelli (evo) <evo@debian.org>  Sun, 16 Jan 2011 13:48:08 +0100
+
+chicken (4.5.0-1) unstable; urgency=low
+
+  * New upstream version.
+
+ -- Davide Puricelli (evo) <evo@debian.org>  Thu, 17 Jun 2010 15:06:15 +0200
+
+chicken (4.4.6-1) unstable; urgency=high
+
+  * New upstream version.
+  * Extensions are back in their proper location; closes: #576815.
+
+ -- Davide Puricelli (evo) <evo@debian.org>  Fri, 16 Apr 2010 13:35:43 +0200
+
+chicken (4.4.0-1) unstable; urgency=low
+
+  * New upstream version.
+  * Now shipping libchicken5 instead of libchicken4.
+
+ -- Davide Puricelli (evo) <evo@debian.org>  Sat, 27 Mar 2010 13:24:39 +0100
+
+chicken (4.2.0-1) unstable; urgency=low
+
+  * New upstream version; closes: #539841, #548962.
+  * Fixed build process on Debian GNU/Hurd; closes: #532895.
+  * Now shipping libchicken4 instead of libchicken3. 
+
+ -- Davide Puricelli (evo) <evo@debian.org>  Fri, 30 Oct 2009 18:37:39 +0100
+
+chicken (3.4.0-1) unstable; urgency=low
+
+  * New upstream version.
+  * Bumped Standards-Version to release 3.8.1.0.
+  * CFLAGS are now set in the right way.
+  * Shipping HTML manual with doc-base.
+
+ -- Davide Puricelli (evo) <evo@debian.org>  Fri, 03 Apr 2009 17:22:25 +0200
+
+chicken (3.2.7-2) unstable; urgency=high
+
+  * debian/rules: added chrpath support to remove RPATH pointing to
+    insecure location; closes: #495753.
+  * debian/control: added chrpath to Build-Depends. 
+
+ -- Davide Puricelli (evo) <evo@debian.org>  Thu, 21 Aug 2008 11:24:11 +0200
+
+chicken (3.2.7-1) unstable; urgency=high
+
+  * Acknowledge NMU, thanks Ivan for all your work.
+  * New upstream version; closes: #418747, #426095, #426094.
+  * Fixed Build-Depends; closes: #479182.
+  * Added /var/lib/chicken/3 directory; closes: #418738.
+
+ -- Davide Puricelli (evo) <evo@debian.org>  Sat, 05 Jul 2008 09:14:18 +0200
+
+chicken (3.2.7-0.1) unstable; urgency=high
+
+  * Non-maintainer upload
+  * New upstream version
+
+ -- Ivan Raikov <raikov@oist.jp>  Tue, 10 Jun 2008 04:20:00 -1100
+
+chicken (2.5-1) unstable; urgency=low
+
+  * New upstream version; closes: #388632.
+  * Installing eggs into /var/lib/chicken, not /usr/lib/chicken.
+    closes: #388644.
+
+ -- Davide Puricelli (evo) <evo@debian.org>  Sun,  7 Jan 2007 17:13:09 +0100
+
+chicken (2.3-1) unstable; urgency=medium
+
+  * New upstream version.
+  * Fixed nursery size test to let chicken build on ia64 and alpha, too;
+    closes: #356996.
+
+ -- Davide Puricelli (evo) <evo@debian.org>  Sun, 23 Apr 2006 12:28:15 +0200
+
+chicken (2.2-1) unstable; urgency=high
+
+  * New upstream version; closes: #282956.
+  * Repackaged from scratch:
+   - removed chicken and chicken-dev packages.
+   - three new packages, see README.Debian for details.
+   closes: #270827, #339028. 
+  * Added /usr/lib/chicken directory to support external eggs;
+    closes: #337392, #277866.
+  * Added support for ppc64 architecture, closes: #322444.
+  * libchicken-dev now depends on libpcre3-dev, closes: #276981.
+  * Fixed a wrong path into chicken manpage, closes: #328193.
+
+ -- Davide Puricelli (evo) <evo@debian.org>  Tue, 14 Feb 2006 21:56:39 +0100
+
+chicken (1.63-2) unstable; urgency=high
+
+  * Fixed issues with doc-base; closes: #267152, #267148, #267218.
+
+ -- Davide Puricelli (evo) <evo@debian.org>  Sat, 21 Aug 2004 11:12:18 +0200
+
+chicken (1.63-1) unstable; urgency=high
+
+  * New upstream version; closes: #247517, #227115.
+  * Acknowledge NMU, thanks Tollef; closes: #260392, #249340.
+  * Enhanced description; closes: #209441, #251210.
+  * Executed libtoolize before build process; closes: #263089.
+  * Removed useless manpages; closes: #259452.
+  * Added chicken-setup script; closes: #248558.
+
+ -- Davide Puricelli (evo) <evo@debian.org>  Fri, 20 Aug 2004 18:46:00 +0200
+
+chicken (1.22-1.1) unstable; urgency=low
+
+  * NMU
+  * Add amd64 support (closes: #249340)
+
+ -- Tollef Fog Heen <tfheen@debian.org>  Tue, 20 Jul 2004 11:28:05 +0200
+
+chicken (1.22-1) unstable; urgency=low
+
+  * New upstream version.
+
+ -- Davide Puricelli (evo) <evo@debian.org>  Mon, 19 Jan 2004 18:41:54 +0100
+
+chicken (1.17-2) unstable; urgency=medium
+
+  * Applied patch suggested by Matthias Klose to fix build failures
+    on m68k, mips and mipsel, closes: #208932.
+
+ -- Davide Puricelli (evo) <evo@debian.org>  Sat,  6 Sep 2003 14:19:00 +0200
+
+chicken (1.17-1) unstable; urgency=low
+
+  * New upstream version, closes: #199560.
+
+ -- Davide Puricelli (evo) <evo@debian.org>  Sat,  6 Sep 2003 11:51:39 +0200
+
+chicken (1.10-2) unstable; urgency=high
+
+  * Running libtoolize before build process should fix all those
+    horrible build failures on archs != i386.
+
+ -- Davide Puricelli (evo) <evo@debian.org>  Sun,  8 Jun 2003 12:17:29 +0200
+
+chicken (1.10-1) unstable; urgency=low
+
+  * New upstream version.
+  * debian/control: fixed a spelling error, closes: #195119.
+  * chicken.doc-base: it's "manual.html", not "index.html", thanks Laurent.
+    closes: #189742.
+
+ -- Davide Puricelli (evo) <evo@debian.org>  Sat,  7 Jun 2003 12:08:59 +0200
+
+chicken (1.0-1) unstable; urgency=low
+
+  * New upstream version.
+  * Documentation is now installed with install-docs; closes: #181542.
+
+ -- Davide Puricelli (evo) <evo@debian.org>  Sat, 12 Apr 2003 15:42:22 +0200
+
+chicken (0.1082-1) unstable; urgency=low
+
+  * New upstream version.
+  * Removing hacks for hppa and arm, now gcc 3.2 is the default compiler
+    on all the archs, so we shouldn't need them anymore.
+
+ -- Davide Puricelli (evo) <evo@debian.org>  Fri, 14 Feb 2003 14:47:38 +0100
+
+chicken (0.1072-2) unstable; urgency=low
+
+  * Removing useless hack for mips and mipsel; we need gcc-3.2, so we 
+    just have to wait.
+  * Moving /usr/include/* to chicken package; closes: #157841.
+
+ -- Davide Puricelli (evo) <evo@debian.org>  Thu, 12 Sep 2002 13:11:22 +0200
+
+chicken (0.1072-1) unstable; urgency=low
+
+  * New upstream version.
+  * Added highlevel-macros.scm, moremacros.scm and chicken.init;
+    closes: #156700.
+  * hppa, mips and mipsel need -ffunction-sections to build;
+    closes: #150901.
+
+ -- Davide Puricelli (evo) <evo@debian.org>  Sat, 17 Aug 2002 12:16:36 +0200
+
+chicken (0.1071-1) unstable; urgency=low
+
+  * New upstream version.
+  * Now it should compile fine on Alpha; closes: #144373.
+
+ -- Davide Puricelli (evo) <evo@debian.org>  Mon, 29 Jul 2002 23:07:36 +0200
+
+chicken (0.990-2) unstable; urgency=low
+
+  * New maintainer.
+  * Config.guess and config.sub are updated before building the package.
+    closes: #143490.
+
+ -- Davide Puricelli (evo) <evo@debian.org>  Wed, 19 Jun 2002 20:10:09 +0200
+
+chicken (0.990-1) unstable; urgency=low
+
+  * Initial release.
+
+ -- zhaoway <zw@debian.org>  Mon, 21 Jan 2002 20:40:17 +0800
+  
