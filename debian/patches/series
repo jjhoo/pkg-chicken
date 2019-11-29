@@ -1,1 +1,3 @@
 fix-manpages.patch
+fix-incorrect-bignum-allocation-sizes.patch
+regenerated-c-files.patch
